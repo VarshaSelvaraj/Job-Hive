@@ -20,6 +20,7 @@ import ApplyJob from "./components/ApplyJob";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js"; 
 import RecruiterDashBoard from "./components/RecruiterDashBoard";
+import HrProfile from "./components/HrProfile";
 
 // Define stripePromise
 const stripePromise = loadStripe("your-publishable-key-here");
@@ -52,6 +53,7 @@ function App() {
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
+        window.location.href = "/login";
         setUser(null); 
     };
 
@@ -73,6 +75,7 @@ function App() {
                 <Route path='/about' element={<About />} />
                 <Route path='/jobs/:job_id' element={<JobDetailsView />} />
                 <Route path='/signup' element={<Signup />} />
+                <Route path="/editJob/:id" element={<EditJob />} />
                 <Route path='/login' element={<Login onLogin={handleLogin} />} />
                 <Route path='/seekerprofile' element={<SeekerProfile />} />
                 <Route path='/ApplyJob/:jobid' element={<ApplyJob />} />
