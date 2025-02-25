@@ -1,0 +1,33 @@
+version: '3.0'
+
+services:
+  frontend:
+    image: frontend:latest
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+  backend:
+    image: backend:latest
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - SUPABASE_URL=https://ahfvenebcoumlxpoxyvb.supabase.co
+      - SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFoZnZlbmViY291bWx4cG94eXZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAyOTM2NTcsImV4cCI6MjA1NTg2OTY1N30.6IRtTxwhFqXTbUohIld9dEQ2XjTNG9nl-_uyBM_DLy0
+      - PORT=5000
+    ports:
+      - "5000:5000"
+
+  # db:
+  #   image: supabase/postgres
+  #   restart: always
+    
+  #   volumes:
+  #     - ./data:/data/db
+  #   ports:
+  #     - "27017:27017" 
