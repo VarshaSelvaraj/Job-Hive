@@ -37,10 +37,9 @@ const NewPremiumUser = () => {
       setLoading(false);
     }
   };
-
   return (
-    <div className="min-h-screen flex justify-center items-center bg-white p-8 mt-20">
-      <div className="flex gap-6 flex-wrap justify-center">
+    <div className="h-auto flex justify-center items-center bg-white p-8 mt-50">
+      <div className="flex gap-30 flex-wrap justify-center">
         {plans.map((plan, index) => (
           <div
             key={index}
@@ -71,6 +70,7 @@ const NewPremiumUser = () => {
       {error && <p className="text-red-500 mt-4">{error}</p>}
     </div>
   );
+  
   
 };
 

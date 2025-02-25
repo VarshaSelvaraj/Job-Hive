@@ -1,9 +1,24 @@
 import { Link } from "react-router-dom";
 import { FaHive, FaSearch, FaHome, FaBriefcase, FaUser, FaSignOutAlt } from "react-icons/fa"; // Importing icons
+import { useState, useEffect } from "react"; // Import useState and useEffect
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
-const MainNavbar = ({logout}) => {
+const MainNavbar = ({ logout }) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userDetails = localStorage.getItem("user");
+    if (userDetails) {
+      try {
+        const parsedUser = JSON.parse(userDetails);
+        console.log("User data from localStorage:", parsedUser);
+        setUser(parsedUser);
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+      }
+    }
+  }, []); // ✅ Corrected the closing bracket placement
 
   return (
     <nav className="bg-white fixed w-full top-0 left-0 shadow-lg py-4 z-50">
@@ -37,15 +52,15 @@ const MainNavbar = ({logout}) => {
             <Link to="/jobs" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600">
               <FaBriefcase /> <span>Jobs</span>
             </Link>
-            <Link to="/profile" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600">
+            <Link to={`/seeker-profile/${user?.id || ""}`} className="flex items-center space-x-1 text-gray-700 hover:text-blue-600">
               <FaUser /> <span>Profile</span>
             </Link>
             <Link to="/premium" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600">
               <span>👑Premium</span>
             </Link>
-           
-              <FaSignOutAlt /> <button  onClick={logout}><span>Logout</span></button>
-           
+            <button onClick={logout} className="flex items-center space-x-1 text-gray-700 hover:text-red-600">
+              <FaSignOutAlt /> <span>Logout</span>
+            </button>
           </div>
 
         </div>

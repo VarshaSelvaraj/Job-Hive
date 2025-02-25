@@ -7,6 +7,7 @@ const { loginUser } = require('../Controllers/loginController');
 const { checkPremium, createCheckoutSession } = require("../Controllers/Premiumdata");
 const { postJob } = require("../Controllers/jobController");
 const { getJobsByR_Id } = require('../Controllers/getJobsByR_Id');
+const { getProfile, updateProfile } = require('../Controllers/ProfileController');
 
 const router = express.Router();
 
@@ -27,5 +28,8 @@ router.post('/login', loginUser);
 // Premium functionality routes
 router.get('/check-premium/:number', checkPremium);
 router.post("/create-checkout-session", createCheckoutSession);
+
+router.get('/profile/:email', getProfile);
+router.put('/update-profile/:email', updateProfile);
 
 module.exports = router;

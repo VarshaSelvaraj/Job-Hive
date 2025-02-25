@@ -43,7 +43,7 @@ const JobDetailsView = () => {
   if (!job) return <p className="text-center text-red-500">Job not found!</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-2xl mt-6">
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-2xl mt-30">
       <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
         <Briefcase size={26} className="text-blue-500" /> {job.job_title}
       </h1>

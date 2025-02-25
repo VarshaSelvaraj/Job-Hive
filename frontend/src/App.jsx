@@ -18,7 +18,6 @@ import AddJobForm from "./components/AddJobForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js"; 
 import RecruiterDashBoard from "./components/RecruiterDashBoard";
-import HrProfile from "./components/HrProfile";
 
 // Define stripePromise
 const stripePromise = loadStripe("your-publishable-key-here");
@@ -73,7 +72,6 @@ function App() {
                 <Route path='/jobs/:job_id' element={<JobDetailsView />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/login' element={<Login onLogin={handleLogin} />} />
-                <Route path='/seekerprofile' element={<SeekerProfile />} />
                 <Route path='/premium' element={<PremiumPage />} />
                 {/* Wrap only the Premium Page requiring Stripe inside Elements */}
                 <Route 
@@ -86,7 +84,8 @@ function App() {
                 />
                 <Route path='/haspremium' element={<PremiumContent />} />
                 <Route path='/addJob' element={<AddJobForm />} />
-                <Route path="/dashboard" element={<RecruiterDashBoard />} />
+                <Route path='/dashboard' element={<RecruiterDashBoard />} />
+                <Route path="/seeker-profile/:id" element={<SeekerProfile />} />
                 <Route path='/profile'
             element={
             user ? (
@@ -95,7 +94,7 @@ function App() {
             <Login onLogin={handleLogin} />  // Redirect to login if no user is logged in
             )
         }
-/>
+        />
 
           </Routes>
         </BrowserRouter>
