@@ -19,7 +19,7 @@ app.listen(PORT, async () => {
 
   // Check Supabase connection on startup
   try {
-    const { error } = await supabase.from("jobs").select("job_id").limit(1);
+    const { error } = await supabase.from("jobs_data").select("id").limit(1);
     if (error) {
       console.error("❌ Supabase connection failed:", error.message);
     } else {

@@ -19,6 +19,7 @@ import AddJobForm from "./components/AddJobForm";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js"; 
+import RecruiterDashBoard from "./components/RecruiterDashBoard";
 
 // Define stripePromise
 const stripePromise = loadStripe("your-publishable-key-here");
@@ -80,6 +81,7 @@ function App() {
                 <Route path='/haspremium' element={<PremiumContent />} />
                 <Route path='/hrprofile' element={<HrProfile />} />
                 <Route path='/addJob' element={<AddJobForm />} />
+                <Route path="/dashboard" element={<RecruiterDashBoard />} />
             </Routes>
         </BrowserRouter>
         </>
