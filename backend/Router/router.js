@@ -8,7 +8,7 @@ const { checkPremium, createCheckoutSession } = require("../Controllers/Premiumd
 const { postJob } = require("../Controllers/jobController");
 const { appliedjob } = require("../Controllers/jobapply");
 const { getJobsByR_Id } = require('../Controllers/getJobsByR_Id');
-const { getProfile, updateProfile } = require('../Controllers/ProfileController');
+const { getProfile} = require('../Controllers/ProfileController');
 
 const router = express.Router();
 
@@ -32,6 +32,5 @@ router.post("/create-checkout-session", createCheckoutSession);
 router.post("/appliedjob", appliedjob);
 
 router.get('/profile/:email', getProfile);
-router.put('/update-profile/:email', updateProfile);
 
 module.exports = router;
