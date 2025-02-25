@@ -6,6 +6,7 @@ const { storeJobSeeker, storeRecruiter,getRecruiterDetailsById } = require('../C
 const { loginUser } = require('../Controllers/loginController');
 const { checkPremium, createCheckoutSession } = require("../Controllers/Premiumdata");
 const { postJob } = require("../Controllers/jobController");
+const { appliedjob } = require("../Controllers/jobapply");
 const { getJobsByR_Id } = require('../Controllers/getJobsByR_Id');
 const { getProfile, updateProfile } = require('../Controllers/ProfileController');
 
@@ -28,6 +29,7 @@ router.post('/login', loginUser);
 // Premium functionality routes
 router.get('/check-premium/:number', checkPremium);
 router.post("/create-checkout-session", createCheckoutSession);
+router.post("/appliedjob", appliedjob);
 
 router.get('/profile/:email', getProfile);
 router.put('/update-profile/:email', updateProfile);
