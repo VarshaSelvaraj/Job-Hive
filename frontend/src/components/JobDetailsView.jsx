@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
+
 import { Briefcase, Globe, Linkedin, MapPin, Calendar, Building, Users, Info } from "lucide-react";
 
 const formatJobDescription = (description) => {
@@ -15,7 +16,7 @@ const JobDetailsView = () => {
   const { job_id } = useParams(); 
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
-
+const navigate=useNavigate();
   useEffect(() => {
     const fetchJobDetails = async () => {
       try {
@@ -38,7 +39,10 @@ const JobDetailsView = () => {
 
     fetchJobDetails();
   }, [job_id]);
+  const handleSubmit=()=>{
 
+    navigate(`/ApplyJob/${job_id}`);  
+  }
   if (loading) return <p className="text-center text-gray-500">Loading job details... </p>;
   if (!job) return <p className="text-center text-red-500">Job not found!</p>;
 
@@ -87,13 +91,16 @@ const JobDetailsView = () => {
 
       <div className="mt-6 flex gap-4">
         {job.company_profile?.Website && (
-          <a href={`https://${job.company_profile.Website}`} target="_blank" rel="noopener noreferrer" className="flex-1 text-center bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-5 rounded-lg transition duration-300">
-            Apply Now 🚀
-          </a>
+         <button onClick={() => handleSubmit()} className="flex-1 text-center bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-5 rounded-lg transition duration-300"> Apply Now 🚀</button>
         )}
       </div>
+      
+
     </div>
   );
 };
 
 export default JobDetailsView;
+
+
+// Link to=`/applyjob${job_id}`>Apply Now</Link>

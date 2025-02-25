@@ -6,6 +6,7 @@ const { storeJobSeeker, storeRecruiter,getRecruiterDetailsById } = require('../C
 const { loginUser } = require('../Controllers/loginController');
 const { checkPremium, createCheckoutSession } = require("../Controllers/Premiumdata");
 const { postJob,deleteJobById ,editJobById} = require("../Controllers/jobController");
+const { appliedjob } = require("../Controllers/jobapply");
 const { getJobsByR_Id } = require('../Controllers/getJobsByR_Id');
 
 const router = express.Router();
@@ -15,6 +16,7 @@ router.get('/jobs/:id', getJobById);
 router.get('/jobs/filter', getFilteredJobs);
 router.delete('/jobs/:id', deleteJobById);
 router.put('/jobs/:id', editJobById);
+
 
 router.post("/post-job", postJob);
 router.get("/getRecruiterDetails/:id", getRecruiterDetailsById);
@@ -31,5 +33,6 @@ router.post('/login', loginUser);
 // Premium functionality routes
 router.get('/check-premium/:number', checkPremium);
 router.post("/create-checkout-session", createCheckoutSession);
+router.post("/appliedjob", appliedjob);
 
 module.exports = router;
