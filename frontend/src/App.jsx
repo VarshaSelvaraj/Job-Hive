@@ -16,6 +16,7 @@ import NewPremiumUser from "./components/NewPremiumUser";
 import PremiumContent from "./components/PremiumContent";
 import HrProfile from "./components/HrProfile";
 import AddJobForm from "./components/AddJobForm";
+import ApplyJob from "./components/ApplyJob";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js"; 
@@ -67,6 +68,9 @@ function App() {
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/login' element={<Login onLogin={handleLogin} />} />
                 <Route path='/seekerprofile' element={<SeekerProfile />} />
+                <Route path='/ApplyJob/:jobid' element={<ApplyJob />} />
+
+
                 <Route path='/premium' element={<PremiumPage />} />
                 {/* Wrap only the Premium Page requiring Stripe inside Elements */}
                 <Route 
