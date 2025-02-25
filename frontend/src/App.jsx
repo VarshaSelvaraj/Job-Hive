@@ -16,7 +16,7 @@ import NewPremiumUser from "./components/NewPremiumUser";
 import PremiumContent from "./components/PremiumContent";
 import AddJobForm from "./components/AddJobForm";
 import ApplyJob from "./components/ApplyJob";
-
+import EditJob from "./components/EditJob";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js"; 
 import RecruiterDashBoard from "./components/RecruiterDashBoard";
