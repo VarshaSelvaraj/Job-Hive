@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import ApplicantsPopup from "./ApplicantsPopup";
 
 function DisplayJobByR_Id() {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showApplicants, setShowApplicants] = useState(false);
+    const [applicants, setApplicants] = useState([]);
     const user = JSON.parse(localStorage.getItem("user")); // Get recruiter details
-
+    // const [applicant_count, setApplicant_count] = useState(0);
     useEffect(() => {
         if (user?.id) {
             axios
@@ -23,7 +25,19 @@ function DisplayJobByR_Id() {
         }
     }, [user]);
 
-    // Function to handle job deletion
+    const openApplicants = async (id) => {
+        try {
+            const response = await axios.get(`http://localhost:5000/applicants/${id}`);
+            setApplicants(response.data.jobSeekers || []); // Ensure it's always an array
+            // applicant_count = response.data.jobSeekers.length;
+            setShowApplicants(true);
+        } catch (error) {
+            console.error("Error fetching applicants:", error);
+            setApplicants([]); // Ensure state is always an array
+            setShowApplicants(true);
+        }
+    };
+
     const handleDelete = async (jobId) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this job?");
         if (!confirmDelete) return;
@@ -41,10 +55,6 @@ function DisplayJobByR_Id() {
             alert("Failed to delete the job. Please try again.");
         }
     };
-
-    if (loading) {
-        return <p className="text-center text-gray-500">Loading jobs...</p>;
-    }
 
     return (
         <div className="max-w-6xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
@@ -66,16 +76,23 @@ function DisplayJobByR_Id() {
                                 <p className="text-gray-600"><strong>Experience Required:</strong> {job.experience}</p>
                                 <p className="text-gray-600"><strong>Job Type:</strong> {job.employment_type}</p>
                                 <p className="text-gray-600"><strong>Posted On:</strong> {new Date(job.created_at).toLocaleDateString()}</p>
+                                {/* <p className="text-gray-600"><strong>Applicants:</strong> {applicant_count}</p> */}
                             </div>
 
                             <div className="mt-4 flex justify-between">
-                            <Link to={`/editJob/${job.id}`}>
-                                    <button
-                                        className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-                                    >
+                                <Link to={`/editJob/${job.id}`}>
+                                    <button className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
                                         Edit
                                     </button>
                                 </Link>
+
+                                <button
+                                    onClick={() => openApplicants(job.id)}
+                                    className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 shadow-md hover:shadow-lg"
+                                >
+                                    See Applicants
+                                </button>
+
                                 <button
                                     onClick={() => handleDelete(job.id)}
                                     className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
@@ -86,6 +103,13 @@ function DisplayJobByR_Id() {
                         </div>
                     ))}
                 </div>
+            )}
+
+            {showApplicants && (
+                <ApplicantsPopup 
+                    applicants={applicants} 
+                    onClose={() => setShowApplicants(false)} 
+                />
             )}
         </div>
     );

@@ -9,6 +9,8 @@ const { postJob,deleteJobById ,editJobById} = require("../Controllers/jobControl
 const { appliedjob } = require("../Controllers/jobapply");
 const { getJobsByR_Id } = require('../Controllers/getJobsByR_Id');
 const { getProfile} = require('../Controllers/ProfileController');
+const { getAppliedJobsByS_Id } = require('../Controllers/getAppliedJobsByS_Id');
+const { getJobApplicantsByJob_Id } = require('../Controllers/getJobApplicantsByJob_Id');
 
 const router = express.Router();
 
@@ -38,4 +40,9 @@ router.post("/appliedjob", appliedjob);
 
 router.get('/profile/:email', getProfile);
 
+// getting the aplied jobs by using the seeker id
+router.get('/applied-jobs/:id',getAppliedJobsByS_Id)
+
+// getting the applicants deatils by uing the job id
+router.get('/applicants/:id',getJobApplicantsByJob_Id)
 module.exports = router;

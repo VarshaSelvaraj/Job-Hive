@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams,useNavigate } from "react-router-dom";
-
-import { Briefcase, Globe, Linkedin, MapPin, Calendar, Building, Users, Info } from "lucide-react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Briefcase, Globe, MapPin, Calendar, Building, Users, Info } from "lucide-react";
 
 const formatJobDescription = (description) => {
   if (!description) return "No description available.";
@@ -13,19 +12,17 @@ const formatJobDescription = (description) => {
 };
 
 const JobDetailsView = () => {
-  const { job_id } = useParams(); 
+  const { job_id } = useParams();
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
-const navigate=useNavigate();
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchJobDetails = async () => {
       try {
         const response = await fetch(`http://localhost:5000/jobs/${job_id}`);
         const data = await response.json();
         if (response.ok) {
-          if (data.job.company_profile) {
-            data.job.company_profile = JSON.parse(data.job.company_profile);
-          }
           setJob(data.job);
         } else {
           console.error("Error fetching job details:", data.error);
@@ -39,15 +36,16 @@ const navigate=useNavigate();
 
     fetchJobDetails();
   }, [job_id]);
-  const handleSubmit=()=>{
 
-    navigate(`/ApplyJob/${job_id}`);  
-  }
-  if (loading) return <p className="text-center text-gray-500">Loading job details... </p>;
+  const handleSubmit = () => {
+    navigate(`/ApplyJob/${job_id}`);
+  };
+
+  if (loading) return <p className="text-center text-gray-500">Loading job details...</p>;
   if (!job) return <p className="text-center text-red-500">Job not found!</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-2xl mt-30">
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-2xl mt-10">
       <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
         <Briefcase size={26} className="text-blue-500" /> {job.job_title}
       </h1>
@@ -56,11 +54,6 @@ const navigate=useNavigate();
         <h3 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
           <Building size={22} className="text-gray-600" /> {job.company}
         </h3>
-        {job.company_profile?.Website && (
-          <a href={`https://${job.company_profile.Website}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline flex items-center gap-1">
-            <Globe size={18} /> Visit Website
-          </a>
-        )}
       </div>
 
       <div className="mt-4 space-y-2">
@@ -70,15 +63,8 @@ const navigate=useNavigate();
         <p className="text-gray-700 flex items-center gap-2"><Users size={18} className="text-gray-600" /><strong>Salary Range:</strong> {job.salary_range}</p>
         <p className="text-gray-700 flex items-center gap-2"><Building size={18} className="text-gray-600" /><strong>Work Type:</strong> {job.work_type}</p>
         <p className="text-gray-700 flex items-center gap-2"><Building size={18} className="text-gray-600" /><strong>Employment Type:</strong> {job.employment_type}</p>
-        <p className="text-gray-700 flex items-center gap-2"><Info size={18} className="text-gray-600" /><strong>Skills:</strong> {job.skills}</p>
         <p className="text-gray-700 flex items-center gap-2"><MapPin size={18} className="text-gray-600" /><strong>Location:</strong> {job.location}, {job.country}</p>
-        {job.company_profile && (
-          <>
-            <p className="text-gray-700 flex items-center gap-2"><Info size={18} className="text-gray-600" /><strong>Sector:</strong> {job.company_profile.Sector}</p>
-            <p className="text-gray-700 flex items-center gap-2"><Info size={18} className="text-gray-600" /><strong>Industry:</strong> {job.company_profile.Industry}</p>
-            <p className="text-gray-700 flex items-center gap-2"><MapPin size={18} className="text-gray-600" /><strong>City:</strong> {job.company_profile.City}</p>
-          </>
-        )}
+        <p className="text-gray-700 flex items-center gap-2"><Info size={18} className="text-gray-600" /><strong>Skills:</strong> {Array.isArray(job.skills) ? job.skills.join(", ") : job.skills}</p>
       </div>
 
       <div className="mt-6">
@@ -90,17 +76,12 @@ const navigate=useNavigate();
       </div>
 
       <div className="mt-6 flex gap-4">
-        {job.company_profile?.Website && (
-         <button onClick={() => handleSubmit()} className="flex-1 text-center bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-5 rounded-lg transition duration-300"> Apply Now 🚀</button>
-        )}
+        <button onClick={handleSubmit} className="flex-1 text-center bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-5 rounded-lg transition duration-300">
+          Apply Now 🚀
+        </button>
       </div>
-      
-
     </div>
   );
 };
 
 export default JobDetailsView;
-
-
-// Link to=`/applyjob${job_id}`>Apply Now</Link>
