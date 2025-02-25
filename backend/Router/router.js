@@ -9,6 +9,7 @@ const { postJob,deleteJobById ,editJobById} = require("../Controllers/jobControl
 const { appliedjob } = require("../Controllers/jobapply");
 const { getJobsByR_Id } = require('../Controllers/getJobsByR_Id');
 const { getProfile} = require('../Controllers/ProfileController');
+const { getAppliedJobsByS_Id } = require('../Controllers/getAppliedJobsByS_Id');
 
 const router = express.Router();
 
@@ -38,4 +39,5 @@ router.post("/appliedjob", appliedjob);
 
 router.get('/profile/:email', getProfile);
 
+router.get('/applied-jobs/:id',getAppliedJobsByS_Id)
 module.exports = router;
