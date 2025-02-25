@@ -54,7 +54,7 @@ function App() {
             {/* Render Navbar based on user type */}
             {!user ? (
                 <Navbar />
-            ) : user.usertype === "recruiter" ? (
+            ) : user.userType === "recruiter" ? (
                 <RecruiterNavBar logout={handleLogout} />
             ) : (
                 <MainNavbar logout={handleLogout} />
