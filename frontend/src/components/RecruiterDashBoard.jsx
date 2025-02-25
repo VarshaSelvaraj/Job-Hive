@@ -1,3 +1,62 @@
+// import React, { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+
+// function RecruiterDashBoard() {
+//   const [recruiter, setRecruiter] = useState(null);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     // Fetch recruiter details (mock API call)
+//     const fetchRecruiterDetails = async () => {
+//       try {
+//         const response = await fetch("/api/recruiter/details");
+//         const data = await response.json();
+//         setRecruiter(data);
+//       } catch (error) {
+//         console.error("Error fetching recruiter details:", error);
+//       }
+//     };
+
+//     fetchRecruiterDetails();
+//   }, []);
+
+//   return (
+//     <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+//       <h1 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "20px" }}>
+//         Recruiter Dashboard
+//       </h1>
+
+//       {recruiter ? (
+//         <div style={{ border: "1px solid #ddd", padding: "15px", borderRadius: "8px", marginBottom: "20px" }}>
+//           <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>{recruiter.name}</h2>
+//           <p><strong>Email:</strong> {recruiter.email}</p>
+//           <p><strong>Company:</strong> {recruiter.company}</p>
+//         </div>
+//       ) : (
+//         <p>Loading recruiter details...</p>
+//       )}
+
+//       <button
+//         style={{
+//           backgroundColor: "#007BFF",
+//           color: "white",
+//           padding: "10px 15px",
+//           border: "none",
+//           borderRadius: "5px",
+//           cursor: "pointer",
+//         }}
+//         onClick={() => navigate("/addJob")}
+//       >
+//         Add New Job
+//       </button>
+//     </div>
+//   );
+// }
+
+// export default RecruiterDashBoard;
+
+
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -21,14 +80,12 @@ function RecruiterDashBoard() {
   }, []);
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h1 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "20px" }}>
-        Recruiter Dashboard
-      </h1>
+    <div className="p-5 font-sans mt-20">
+      <h1 className="text-2xl font-bold mb-5">Recruiter Dashboard</h1>
 
       {recruiter ? (
-        <div style={{ border: "1px solid #ddd", padding: "15px", borderRadius: "8px", marginBottom: "20px" }}>
-          <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>{recruiter.name}</h2>
+        <div className="border border-gray-300 p-4 rounded-lg mb-5 shadow-md">
+          <h2 className="text-xl font-semibold">{recruiter.name}</h2>
           <p><strong>Email:</strong> {recruiter.email}</p>
           <p><strong>Company:</strong> {recruiter.company}</p>
         </div>
@@ -37,14 +94,7 @@ function RecruiterDashBoard() {
       )}
 
       <button
-        style={{
-          backgroundColor: "#007BFF",
-          color: "white",
-          padding: "10px 15px",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
+        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200"
         onClick={() => navigate("/addJob")}
       >
         Add New Job
@@ -54,3 +104,4 @@ function RecruiterDashBoard() {
 }
 
 export default RecruiterDashBoard;
+

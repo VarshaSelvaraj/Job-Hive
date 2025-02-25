@@ -39,18 +39,27 @@ const NewPremiumUser = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-900 p-8">
-      <div className="space-y-6">
+    <div className="min-h-screen flex justify-center items-center bg-white p-8 mt-20">
+      <div className="flex gap-6 flex-wrap justify-center">
         {plans.map((plan, index) => (
-          <div key={index} className="w-110 bg-white shadow-lg rounded-2xl p-4 flex flex-col items-center transition-transform transform hover:scale-105">
-            <img src={plan.image} alt={plan.name} className="w-24 h-24 rounded-full shadow-md mb-4" />
+          <div
+            key={index}
+            className="w-80 shadow-lg rounded-2xl p-6 flex flex-col items-center transition-transform transform hover:scale-105 bg-gray-50"
+          >
+            <img
+              src={plan.image}
+              alt={plan.name}
+              className="w-24 h-24 rounded-full shadow-md mb-4"
+            />
             <h2 className="text-xl font-bold text-gray-800">{plan.name}</h2>
             <p className="text-lg text-gray-600">{plan.price}</p>
             <ul className="mt-4 space-y-2 text-center">
-              {plan.features.map((feature, i) => <li key={i} className="text-gray-700 text-sm">{feature}</li>)}
+              {plan.features.map((feature, i) => (
+                <li key={i} className="text-gray-700 text-sm">{feature}</li>
+              ))}
             </ul>
-            <button 
-              className="bg-green-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-green-600" 
+            <button
+              className="bg-green-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-green-600"
               onClick={() => handleActivate(plan)}
               disabled={loading}
             >
@@ -62,6 +71,7 @@ const NewPremiumUser = () => {
       {error && <p className="text-red-500 mt-4">{error}</p>}
     </div>
   );
+  
 };
 
 export default NewPremiumUser;
