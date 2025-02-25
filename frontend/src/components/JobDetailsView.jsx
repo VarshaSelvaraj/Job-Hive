@@ -45,40 +45,78 @@ const JobDetailsView = () => {
   if (!job) return <p className="text-center text-red-500">Job not found!</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-2xl mt-10">
-      <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
-        <Briefcase size={26} className="text-blue-500" /> {job.job_title}
-      </h1>
+    <div className="bg-[#9CDAD8] min-h-screen flex items-center justify-center px-4">
+      <div className="max-w-4xl w-full bg-white shadow-lg rounded-2xl p-8">
+        {/* Job Title */}
+        <h1 className="text-3xl font-bold text-gray-600 flex items-center gap-2">
+          <Briefcase size={28} className="text-[#9CDAD8]" /> {job.job_title}
+        </h1>
 
-      <div className="mt-4 flex items-center gap-4">
-        <h3 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
-          <Building size={22} className="text-gray-600" /> {job.company}
+        {/* Company Name */}
+        <h3 className="text-lg font-semibold text-gray-700 mt-2 flex items-center gap-2">
+          <Building size={22} className="text-gray-400" /> {job.company}
         </h3>
-      </div>
 
-      <div className="mt-4 space-y-2">
-        <p className="text-gray-700 flex items-center gap-2"><Briefcase size={18} className="text-gray-600" /><strong>Role:</strong> {job.role}</p>
-        <p className="text-gray-700 flex items-center gap-2"><Users size={18} className="text-gray-600" /><strong>Experience:</strong> {job.experience}</p>
-        <p className="text-gray-700 flex items-center gap-2"><Info size={18} className="text-gray-600" /><strong>Qualifications:</strong> {job.qualifications}</p>
-        <p className="text-gray-700 flex items-center gap-2"><Users size={18} className="text-gray-600" /><strong>Salary Range:</strong> {job.salary_range}</p>
-        <p className="text-gray-700 flex items-center gap-2"><Building size={18} className="text-gray-600" /><strong>Work Type:</strong> {job.work_type}</p>
-        <p className="text-gray-700 flex items-center gap-2"><Building size={18} className="text-gray-600" /><strong>Employment Type:</strong> {job.employment_type}</p>
-        <p className="text-gray-700 flex items-center gap-2"><MapPin size={18} className="text-gray-600" /><strong>Location:</strong> {job.location}, {job.country}</p>
-        <p className="text-gray-700 flex items-center gap-2"><Info size={18} className="text-gray-600" /><strong>Skills:</strong> {Array.isArray(job.skills) ? job.skills.join(", ") : job.skills}</p>
-      </div>
+        {/* Job Details */}
+        <div className="mt-4 space-y-3">
+          <p className="text-gray-700 flex items-center gap-2">
+            <Briefcase size={18} className="text-gray-400" />
+            <strong>Role:</strong> {job.role}
+          </p>
+          <p className="text-gray-700 flex items-center gap-2">
+            <Users size={18} className="text-gray-400" />
+            <strong>Experience:</strong> {job.experience}
+          </p>
+          <p className="text-gray-700 flex items-center gap-2">
+            <Info size={18} className="text-gray-400" />
+            <strong>Qualifications:</strong> {job.qualifications}
+          </p>
+          <p className="text-gray-700 flex items-center gap-2">
+            <Users size={18} className="text-gray-400" />
+            <strong>Salary Range:</strong> {job.salary_range}
+          </p>
+          <p className="text-gray-700 flex items-center gap-2">
+            <Building size={18} className="text-gray-400" />
+            <strong>Work Type:</strong> {job.work_type}
+          </p>
+          <p className="text-gray-700 flex items-center gap-2">
+            <Building size={18} className="text-gray-400" />
+            <strong>Employment Type:</strong> {job.employment_type}
+          </p>
+          <p className="text-gray-700 flex items-center gap-2">
+            <MapPin size={18} className="text-gray-400" />
+            <strong>Location:</strong> {job.location}, {job.country}
+          </p>
+          <p className="text-gray-700 flex items-center gap-2">
+            <Info size={18} className="text-gray-400" />
+            <strong>Skills:</strong>{" "}
+            {Array.isArray(job.skills) ? job.skills.join(", ") : job.skills}
+          </p>
+        </div>
 
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
-          <Info size={22} className="text-blue-500" />
-          Job Description
-        </h3>
-        <div className="text-gray-700 mt-2 leading-relaxed" dangerouslySetInnerHTML={{ __html: formatJobDescription(job.job_description) }} />
-      </div>
+        {/* Job Description */}
+        <div className="mt-6">
+          <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+            <Info size={22} className="text-[#9CDAD8]" />
+            Job Description
+          </h3>
+          <div
+            className="text-gray-700 mt-2 leading-relaxed"
+            dangerouslySetInnerHTML={{
+              __html: formatJobDescription(job.job_description),
+            }}
+          />
+        </div>
 
-      <div className="mt-6 flex gap-4">
-        <button onClick={handleSubmit} className="flex-1 text-center bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-5 rounded-lg transition duration-300">
-          Apply Now 🚀
-        </button>
+        {/* Apply Button */}
+        <div className="mt-6 flex justify-center">
+          <button
+            onClick={handleSubmit}
+            className="w-full max-w-xs text-center bg-[#9CDAD8] hover:bg-gray-300 text-zinc-900 font-semibold py-3 px-5 rounded-lg transition duration-300"
+          >
+            Apply Now 
+          </button>
+        </div>
       </div>
     </div>
   );

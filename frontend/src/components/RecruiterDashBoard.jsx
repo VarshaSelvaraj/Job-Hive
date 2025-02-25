@@ -15,46 +15,63 @@ function RecruiterDashBoard() {
           console.error("No user found in local storage");
           return;
         }
-        console.log("Stored user:", storedUser);
         const user = JSON.parse(storedUser);
         if (user.userType !== "recruiter") {
           console.error("User is not a recruiter");
           return;
-        }  
+        }
         const response = await axios.get(`http://localhost:5000/getRecruiterDetails/${user.id}`);
         setRecruiter(response.data);
       } catch (error) {
         console.error("Error fetching recruiter details:", error);
       }
     };
-  
+
     fetchRecruiterDetails();
   }, []);
 
   return (
-    <div className="p-6 min-h-screen mt-20 bg-gray-100">
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">Recruiter Dashboard</h1>
+    <div className="min-h-screen bg-[#9CDAD8] flex items-start justify-center p-8 mt-15">
+      <div className="max-w-6xl w-full flex gap-8">
+        {/* Left Section: Recruiter Info */}
+        <div className="bg-white shadow-lg rounded-lg flex-1 max-w-[25%] text-center overflow-hidden">
+          {recruiter ? (
+            <>
+              {/* Profile Image (Full width, no padding) */}
+              <img
+                src={recruiter.profileImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8oghbsuzggpkknQSSU-Ch_xep_9v3m6EeBQ&s"}
+                alt="Profile"
+                className="w-full h-48 object-cover"
+              />
 
-      {recruiter ? (
-        <div className="bg-white shadow-lg rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-700">{recruiter.username}</h2>
-          <p className="text-gray-600"><strong>Email:</strong> {recruiter.email}</p>
-          <p className="text-gray-600"><strong>Company:</strong> {recruiter.company_name}</p>
+              <div className="p-6">
+                <h2 className="text-2xl font-bold text-gray-800">Hi, {recruiter.username}!</h2>
+                <p className="text-gray-600 mt-2"><strong>Email:</strong> {recruiter.email}</p>
+                <p className="text-gray-600"><strong>Phone:</strong> {recruiter.phone}</p>
+                <p className="text-gray-600"><strong>Company:</strong> {recruiter.company_name}</p>
+
+                <button
+                  className="mt-6 bg-[#9CDAD8]  hover:bg-gray-300 text-zinc-800 font-semibold py-2 px-6 rounded-lg transition duration-300"
+                  onClick={() => navigate("/addJob")}
+                >
+                  Post New Job
+                </button>
+              </div>
+            </>
+          ) : (
+            <p className="text-gray-500">Loading recruiter details...</p>
+          )}
         </div>
-      ) : (
-        <p className="text-gray-700">Loading recruiter details...</p>
-      )}
 
-      <button
-        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
-        onClick={() => navigate("/addJob")}
-      >
-        Add New Job
-      </button>
-      <DisplayJobByR_Id/>
+        {/* Right Section: Jobs Posted */}
+        <div className="flex-1 max-w-[75%]">
+          <div className="bg-white shadow-lg rounded-lg p-6">
+            <DisplayJobByR_Id />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
 export default RecruiterDashBoard;
-

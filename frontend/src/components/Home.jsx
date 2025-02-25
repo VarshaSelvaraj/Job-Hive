@@ -10,7 +10,7 @@ const Home = () => {
     <>
     
 
-      <div className="bg-[url(https://cdn.dribbble.com/userupload/25159474/file/original-1a44e02216c519975a1f592b13d72076.gif)] bg-no-repeat bg-cover h-screen flex items-center justify-center  relative">
+      <div className="bg-[url(/home-bg.gif)] bg-no-repeat bg-cover h-screen flex items-center justify-center  relative">
 
 <div className="absolute left-30 bottom-20 bg-white/30 backdrop-blur-md p-6 rounded-lg shadow-lg w-130">
   <h1 className="text-4xl pb-3 font-semibold text-zinc-800">"Unlock Your Dream Career"</h1>
