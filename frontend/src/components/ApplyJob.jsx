@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ApplyJob = () => {
+  const navigate=useNavigate()
     const { jobid } = useParams();
     const emailandid = JSON.parse(localStorage.getItem("user") || "{}");
     console.log(emailandid)
@@ -54,7 +55,7 @@ console.log(response.data.secure_url)
   // Handle Form Submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
     let resumeUrl = null;
     if (formData.resume) {
       resumeUrl = await uploadToCloudinary(formData.resume);
@@ -64,7 +65,14 @@ console.log(response.data.secure_url)
       alert("Resume upload failed. Please try again.");
       return;
     }
-
+if(!formdata.name){
+  alert("enter name")
+  return
+}
+if(!formdata.skills){
+  alert("enter skills")
+  return
+}
     // Prepare Data for Backend
     const payload = {
       ...formData,
@@ -76,6 +84,7 @@ console.log(response.data.secure_url)
       const backendResponse = await axios.post("http://localhost:5000/appliedjob", payload);
       console.log("Backend Response:", backendResponse.data);
       alert("Application submitted successfully!");
+      navigate("/main")
     } catch (error) {
       console.error("Backend Error:", error);
       alert("Submission failed. Please try again.");
@@ -84,20 +93,20 @@ console.log(response.data.secure_url)
  
 
   return (
-    <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mt-30">
-      <h2 className="text-center text-xl font-bold mb-4">Apply</h2>
+    <div className="max-w-md mx-auto bg-aqua-100 p-6 rounded-lg shadow-md mt-30 ml-90 border-2 ">
+      <h2 className="text-center text-xl font-bold mb-4 px-20">Apply</h2>
       <form onSubmit={handleSubmit}>
         
-        <input className="w-full p-2 mb-2 border rounded" placeholder="Username" name="username" value={formData.username} onChange={handleChange} />
-        <input className="w-full p-2 mb-2 border rounded" placeholder="Phone" name="phone" value={formData.phone} onChange={handleChange} />
+        <input className="w-full p-2 mb-2 border rounded" placeholder="Enter your name" name="username" value={formData.username} onChange={handleChange} />
+        <input className="w-full p-2 mb-2 border rounded" placeholder="Phone" name="phone Number" value={formData.phone} onChange={handleChange} />
         <input type="date" className="w-full p-2 mb-2 border rounded" name="dob" value={formData.dob} onChange={handleChange} />
         <input className="w-full p-2 mb-2 border rounded" placeholder="Education" name="education" value={formData.education} onChange={handleChange} />
         <input className="w-full p-2 mb-2 border rounded" placeholder="Skills (comma-separated)" name="skills" value={formData.skills} onChange={handleChange} />
-        <input className="w-full p-2 mb-2 border rounded" placeholder="Experience (Years)" type="number" name="experience" value={formData.experience} onChange={handleChange} />
-        <input className="w-full p-2 mb-2 border rounded" placeholder="Languages Known (comma-separated)" name="languages" value={formData.languages} onChange={handleChange} />
+        <input className="w-full p-2 mb-2 border rounded" placeholder="Experience " type="number" name="experience" value={formData.experience} onChange={handleChange} />
+        <input className="w-full p-2 mb-2 border rounded" placeholder="Languages" name="languages" value={formData.languages} onChange={handleChange} />
 
         {/* Resume Upload */}
-        <label className="block mb-2 font-medium">Upload Resume</label>
+        <label className="block mb-2 font-medium">Upload Resume (.doc,.pdf)</label>
         <input type="file" name="resume" accept=".pdf,.doc,.docx" className="w-full p-2 mb-2 border rounded" onChange={handleChange} />
 
         <div className="flex items-center mb-4">
@@ -106,7 +115,7 @@ console.log(response.data.secure_url)
         </div>
 
         <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded" >Apply</button>
-        <button type="reset" className="w-full bg-gray-400 text-white p-2 rounded mt-2">Cancel</button>
+       
       </form>
     </div>
   );

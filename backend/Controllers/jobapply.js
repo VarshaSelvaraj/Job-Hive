@@ -8,7 +8,7 @@ console.log("email:", email);
     const { data, error } = await supabase
       .from("appliedjobs")
       .insert([{ email, applicant_id, job_id, username, phone, dob, education, skills, experience, languages, resume, declaration }]);
-
+console.log("success")
     if (error) throw error;
     
     res.status(201).json({ success: true, message: "Application submitted successfully", data });
