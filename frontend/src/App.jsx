@@ -7,19 +7,20 @@ import About from "./pages/About";
 import JobDetailsView from "./components/JobDetailsView";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import SeekerProfile from "./pages/SeekerProfile";
+import SeekerProfile from "./components/SeekerProfile";
 import MainNavbar from "./components/MainNavbar";
 import Navbar from "./components/Navbar";
 import RecruiterNavBar from "./components/RecruiterNavBar";
 import PremiumPage from "./components/PremiumPage";
 import NewPremiumUser from "./components/NewPremiumUser";
 import PremiumContent from "./components/PremiumContent";
-import HrProfile from "./components/HrProfile";
 import AddJobForm from "./components/AddJobForm";
 import ApplyJob from "./components/ApplyJob";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js"; 
+import RecruiterDashBoard from "./components/RecruiterDashBoard";
+import HrProfile from "./components/HrProfile";
 
 // Define stripePromise
 const stripePromise = loadStripe("your-publishable-key-here");
@@ -31,14 +32,21 @@ function App() {
     useEffect(() => {
         const userDetails = localStorage.getItem("user");
         if (userDetails) {
-            setUser(JSON.parse(userDetails));
+            try {
+                const parsedUser = JSON.parse(userDetails);
+                console.log("User data from localStorage:", parsedUser);
+                setUser(parsedUser);
+            } catch (error) {
+                console.error("Error parsing user data:", error);
+            }
         }
     }, []);
 
     // Function to handle login
     const handleLogin = (userData) => {
+        console.log("Logging in user:", userData); // Debugging output
         localStorage.setItem("user", JSON.stringify(userData));
-        setUser(userData); // Update state immediately
+        setUser(userData);
     };
 
     // Function to handle logout
@@ -54,7 +62,7 @@ function App() {
             {/* Render Navbar based on user type */}
             {!user ? (
                 <Navbar />
-            ) : user.usertype === "recruiter" ? (
+            ) : user.userType === "recruiter" ? (
                 <RecruiterNavBar logout={handleLogout} />
             ) : (
                 <MainNavbar logout={handleLogout} />
@@ -82,12 +90,21 @@ function App() {
                     } 
                 />
                 <Route path='/haspremium' element={<PremiumContent />} />
-                <Route path='/hrprofile' element={<HrProfile />} />
                 <Route path='/addJob' element={<AddJobForm />} />
-            </Routes>
+                <Route path="/dashboard" element={<RecruiterDashBoard />} />
+                <Route path='/profile'
+            element={
+            user ? (
+            user.userType === "recruiter" ? <RecruiterDashBoard /> : <SeekerProfile />
+            ) : (
+            <Login onLogin={handleLogin} />  // Redirect to login if no user is logged in
+            )
+        }
+/>
+
+          </Routes>
         </BrowserRouter>
         </>
-        
     );
 }
 

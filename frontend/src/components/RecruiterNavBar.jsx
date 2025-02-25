@@ -116,7 +116,7 @@ const RecruiterNavBar = ({logout}) => {
               <span>Add New Job</span>
             </Link>
             <Link to="/profile" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600">
-              <FaUser /> <span>Profile</span>
+              <FaUser /> <span>DashBoard</span>
             </Link>
             <Link to="/premium" className="flex items-center space-x-1 text-gray-700 hover:text-blue-600">
               <span>👑Premium</span>

@@ -91,90 +91,43 @@ const storeRecruiter = async (req, res) => {
   return res.status(201).json({ message: 'Recruiter created successfully', data });
 };
 
-const getJobSeekerProfile = async (req, res) => {
-  const { email } = req.params;
+// Function to get recruiter details by email
 
+const getRecruiterDetailsById = async (req, res) => {
   try {
+    const { id } = req.params; // Get id from route params
+
+    if (!id) {
+      return res.status(400).json({ message: "ID is required" });
+    }
+
+    const recruiterId = parseInt(id); // Convert id to number
+
+    // Fetch recruiter details from Supabase
     const { data, error } = await supabase
-      .from("job_seekers")
-      .select("*")
-      .eq("email", email)
-      .single();
+      .from("recruiters")
+      .select("id, username, email, phone, company_name, location")
+      .eq("id", recruiterId)
+      .single(); // Ensures only one record is returned
 
     if (error) {
-      return res.status(400).json({ message: "Profile not found!" });
+      console.error("Supabase error:", error);
+      return res.status(500).json({ message: "Database error", error });
     }
 
-    res.status(200).json(data);
+    if (!data) {
+      return res.status(404).json({ message: "Recruiter not found" });
+    }
+
+    console.log("Recruiter Data:", data);
+    return res.status(200).json(data);
   } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
+    console.error("Server error:", err);
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
-const updateJobSeekerProfile = async (req, res) => {
-  const { email } = req.params;
-  const {
-    dob,
-    education,
-    skills,
-    experienceYears,
-    languages,
-    resume,
-    declaration,
-  } = req.body;
-
-  try {
-    // Check if profile exists
-    const { data: existingProfile } = await supabase
-      .from("job_seeker_profiles")
-      .select("email")
-      .eq("email", email)
-      .single();
-
-    if (existingProfile) {
-      // Update profile if it exists
-      const { data, error } = await supabase
-        .from("job_seeker_profiles")
-        .update({
-          dob,
-          education,
-          skills,
-          experience_years: experienceYears,
-          languages,
-          resume,
-          declaration,
-        })
-        .eq("email", email)
-        .select();
-
-      if (error) return res.status(400).json({ error: "Profile update failed" });
-
-      return res.status(200).json({ message: "Profile updated successfully", data });
-    } else {
-      // Create new profile
-      const { data, error } = await supabase
-        .from("job_seeker_profiles")
-        .insert([{
-          email,
-          dob,
-          education,
-          skills,
-          experience_years: experienceYears,
-          languages,
-          resume,
-          declaration,
-        }])
-        .select();
-
-      if (error) return res.status(400).json({ error: "Profile creation failed" });
-
-      return res.status(201).json({ message: "Profile created successfully", data });
-    }
-  } catch (err) {
-    res.status(500).json({ error: "Server error" });
-  }
-};
+// Ensure correct route mapping
 
 
-
-module.exports = { storeJobSeeker, storeRecruiter,getJobSeekerProfile,updateJobSeekerProfile};
+module.exports = { storeJobSeeker, storeRecruiter,getRecruiterDetailsById};

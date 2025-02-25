@@ -48,8 +48,9 @@ const Login = () => {
 
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
-
-        navigate('/');
+        if(userType === 'jobSeeker') navigate('/');
+        else if(userType === 'recruiter') navigate('/dashboard');
+        // navigate('/');
         window.location.reload();
       }
     } catch (err) {
