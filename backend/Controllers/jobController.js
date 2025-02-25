@@ -71,4 +71,55 @@ const postJob = async (req, res) => {
     }
 };
 
-module.exports = { postJob };
+const deleteJobById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({ error: "Job ID is required" });
+        }
+
+        // Delete the job by ID
+        const { error } = await supabase
+            .from("jobs_data")
+            .delete()
+            .eq("id", id);
+        if (error) {
+            console.error("Supabase Delete Error:", error);
+            return res.status(500).json({ error: error.message });
+        }
+        res.status(200).json({ message: "Job deleted successfully" });
+    } catch (err) {
+        console.error("Server Error:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+const editJobById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedJobData = req.body; // Get updated job details from request body
+
+        if (!id) {
+            return res.status(400).json({ error: "Job ID is required" });
+        }
+
+        // Update the job details
+        const { data, error } = await supabase
+            .from("jobs_data")
+            .update(updatedJobData)
+            .eq("id", id)
+            .select();
+
+        if (error) {
+            console.error("Supabase Update Error:", error);
+            return res.status(500).json({ error: error.message });
+        }
+
+        res.status(200).json({ message: "Job updated successfully", job: data });
+    } catch (err) {
+        console.error("Server Error:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+module.exports = { postJob,deleteJobById ,editJobById};
