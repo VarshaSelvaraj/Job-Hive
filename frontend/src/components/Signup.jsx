@@ -19,35 +19,21 @@ const SignUpPage = () => {
   const validateForm = () => {
     const { username, email, phone, password, confirmPassword } = formData;
 
-    // Username Validation
     const usernameRegex = /^[a-zA-Z0-9_]{5,}$/;
-    if (!usernameRegex.test(username)) {
-      return "Username must be at least 5 characters long and can only contain letters, numbers, and underscores.";
-    }
+    if (!usernameRegex.test(username)) return "Username must be at least 5 characters long and contain only letters, numbers, or underscores.";
 
-    // Email Validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return "Please enter a valid email address.";
-    }
+    if (!emailRegex.test(email)) return "Please enter a valid email address.";
 
-    // Phone Number Validation (10 digits)
     const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(phone)) {
-      return "Phone number must be exactly 10 digits.";
-    }
+    if (!phoneRegex.test(phone)) return "Phone number must be exactly 10 digits.";
 
-    // Password Validation (Minimum 6 characters, at least one number and one special character)
     const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
-    if (!passwordRegex.test(password)) {
-      return "Password must be at least 6 characters long and include at least one number and one special character.";
-    }
+    if (!passwordRegex.test(password)) return "Password must be at least 6 characters, with one number and one special character.";
 
-    if (password !== confirmPassword) {
-      return "Passwords do not match!";
-    }
+    if (password !== confirmPassword) return "Passwords do not match!";
 
-    return null; // No errors
+    return null;
   };
 
   const handleSubmit = async (e) => {
@@ -93,55 +79,66 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6">
-
-        <h2 className="text-2xl font-semibold text-center mb-4">Choose Account Type</h2>
-        <div className="flex justify-center gap-6 mb-6">
-          <div
-            onClick={() => setUserType('jobSeeker')}
-            className={`cursor-pointer p-4 border rounded-lg text-center transition-all duration-300 w-40 shadow-md ${userType === 'jobSeeker' ? 'border-blue-500' : 'border-gray-300'}`}
-          >
-            <p className="font-medium">Job Seeker</p>
-          </div>
-
-          <div
-            onClick={() => setUserType('recruiter')}
-            className={`cursor-pointer p-4 border rounded-lg text-center transition-all duration-300 w-40 shadow-md ${userType === 'recruiter' ? 'border-green-500' : 'border-gray-300'}`}
-          >
-            <p className="font-medium">Recruiter</p>
-          </div>
+    <div className="min-h-screen flex items-center mt-18 justify-center bg-[#9CDAD8] p-6">
+      <div className="w-full max-w-6xl flex bg-white shadow-lg rounded-lg overflow-hidden">
+        
+        {/* Left Side - Welcome Message */}
+        <div className="w-1/2 p-8 flex flex-col justify-center bg-[#73C6C4] text-white">
+          <h2 className="text-4xl font-bold">Join Us Today!</h2>
+          <p className="mt-2 text-xl">Create an account and start your journey.</p>
         </div>
 
-        <h1 className="text-3xl font-semibold text-center mb-6">
-          Sign Up as {userType ? userType.charAt(0).toUpperCase() + userType.slice(1) : '...'}
-        </h1>
-        {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input type="text" name="username" value={formData.username} onChange={handleInputChange} required className="w-full p-3 border border-gray-300 rounded-md" placeholder="Username (Min 5 chars, only letters, numbers, _ )" />
-          <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full p-3 border border-gray-300 rounded-md" placeholder="Email" />
-          <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required className="w-full p-3 border border-gray-300 rounded-md" placeholder="Phone (10 digits only)" />
-          <input type="password" name="password" value={formData.password} onChange={handleInputChange} required className="w-full p-3 border border-gray-300 rounded-md" placeholder="Password (Min 6 chars, 1 number, 1 special char)" />
-          <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} required className="w-full p-3 border border-gray-300 rounded-md" placeholder="Confirm Password" />
-
-          {userType === 'recruiter' && (
-            <input type="text" name="companyName" value={formData.companyName} onChange={handleInputChange} className="w-full p-3 border border-gray-300 rounded-md" placeholder="Company Name" />
-          )}
-
-          <button type="submit" className="w-full py-3 mt-4 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-            {loading ? "Signing up..." : "Sign Up"}
-          </button>
-          <p className="text-center mt-4">
-            Already have an account?{' '}
-            <span
-              className="text-blue-600 cursor-pointer hover:underline"
-              onClick={() => navigate('/login')}
+        {/* Right Side - Sign Up Form */}
+        <div className="w-1/2 p-8">
+          <h2 className="text-2xl font-semibold text-center mb-4 text-zinc-500">Choose Account Type</h2>
+          <div className="flex justify-center gap-4 mb-6">
+            <div
+              onClick={() => setUserType('jobSeeker')}
+              className={`cursor-pointer p-4 border rounded-lg text-center transition-all duration-300 w-40 shadow-md ${
+                userType === 'jobSeeker' ? 'border-blue-500 ' : 'border-gray-300'
+              }`}
             >
-              Login here
-            </span>
-          </p>
-        </form>
+              <p className="font-medium">Job Seeker</p>
+            </div>
+
+            <div
+              onClick={() => setUserType('recruiter')}
+              className={`cursor-pointer p-4 border rounded-lg text-center transition-all duration-300 w-40 shadow-md ${
+                userType === 'recruiter' ? 'border-green-500' : 'border-gray-300'
+              }`}
+            >
+              <p className="font-medium">Recruiter</p>
+            </div>
+          </div>
+
+          <h1 className="text-2xl font-semibold text-center mb-6 text-zinc-700">
+            Sign Up as <span className='text-[#73C6C4]'>{userType ? userType.charAt(0).toUpperCase() + userType.slice(1) : '...'}</span>
+          </h1>
+          {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input type="text" name="username" value={formData.username} onChange={handleInputChange} required className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Username" />
+            <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Email" />
+            <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Phone (10 digits only)" />
+            <input type="password" name="password" value={formData.password} onChange={handleInputChange} required className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Password" />
+            <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} required className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Confirm Password" />
+
+            {userType === 'recruiter' && (
+              <input type="text" name="companyName" value={formData.companyName} onChange={handleInputChange} className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Company Name" />
+            )}
+
+            <button type="submit" className="w-full text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              {loading ? "Signing up..." : "Sign Up"}
+            </button>
+
+            <p className="text-center mt-4">
+              Already have an account?{' '}
+              <span className="text-blue-600 cursor-pointer hover:underline" onClick={() => navigate('/login')}>
+                Login here
+              </span>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   );

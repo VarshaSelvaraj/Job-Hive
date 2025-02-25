@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import Home from "./components/Home";
 import Jobs from "./pages/Jobs";
-import About from "./pages/About";
+
 import JobDetailsView from "./components/JobDetailsView";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
@@ -78,9 +78,8 @@ function App() {
                 <Route path='/signup' element={<Signup />} />
 
                 {/* 🔹 Protected Routes */}
-                <Route path='/' element={<ProtectedRoute element={<Home />} />} />
+                <Route path='/' element={<Home />} />
                 <Route path='/jobs' element={<ProtectedRoute element={<Jobs />} />} />
-                <Route path='/about' element={<ProtectedRoute element={<About />} />} />
                 <Route path='/jobs/:job_id' element={<ProtectedRoute element={<JobDetailsView />} />} />
                 <Route path="/editJob/:id" element={<ProtectedRoute element={<EditJob />} />} />
                 <Route path='/seekerprofile' element={<ProtectedRoute element={<SeekerProfile />} />} />

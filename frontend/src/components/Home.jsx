@@ -1,58 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import About from "../pages/About";
+
 
 const Home = () => {
-  const fullText = "Connecting Talent with Success!";
-  const typingSpeed = 100;
 
-  const [text, setText] = useState("");
-  const [index, setIndex] = useState(0);
-
-
-  // Typing effect for the heading
-  useEffect(() => {
-
-    // Typing effect logic for the heading text
-    if (index < fullText.length) {
-      const timeout = setTimeout(() => {
-        setText(fullText.slice(0, index + 1));
-        setIndex(index + 1);
-      }, typingSpeed);
-      return () => clearTimeout(timeout);
-    }
-  }, [index, fullText]);
+  
 
   return (
     <>
-      {/* Conditionally render MainNavbar or Navbar */}
+    
+
+      <div className="bg-[url(https://cdn.dribbble.com/userupload/25159474/file/original-1a44e02216c519975a1f592b13d72076.gif)] bg-no-repeat bg-cover h-screen flex items-center justify-center  relative">
+
+<div className="absolute left-30 bottom-20 bg-white/30 backdrop-blur-md p-6 rounded-lg shadow-lg w-130">
+  <h1 className="text-4xl pb-3 font-semibold text-zinc-800">"Unlock Your Dream Career"</h1>
+  <h2 className="text-2xl pb-3 font-medium text-zinc-500"> <i> Explore exciting opportunities and take the next step in your journey</i></h2>
+  <Link to="/login">
+    <button type="button" className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center me-2 mb-2">
+      Get Started
+    </button>
+  </Link>
+</div>
+<div className="absolute right-30 top-30 bg-white/30 backdrop-blur-md p-10 rounded-lg shadow-lg w-138">
+  <h1 className="text-4xl  pb-3 font-semibold text-zinc-800">"Find Top Talent Effortlessly"</h1>
+  <h2 className="text-2xl pb-3 font-medium text-zinc-500"><i>Connect with skilled professionals and grow your team</i></h2>
+  <Link to="/login">
+    <button type="button" className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-lg px-5 py-2.5">
+      Start posting jobs!
+    </button>
+  </Link>
+</div>
+
+</div>
       
-
-      {/* Main Container */}
-      <div className="flex flex-col md:flex-row items-center justify-center h-screen bg-gray-100 px-6">
-        {/* Left Side - Image */}
-        <div className="w-full md:w-1/2 flex justify-center">
-          <img
-            src="https://assets-v2.lottiefiles.com/a/d07c305c-117f-11ee-b58d-d7baacc402de/OXV1AtPqup.gif"
-            alt="Find Your Dream Job"
-            className="w-3/4 md:w-2/3 rounded-lg shadow-lg mt-10"
-          />
-        </div>
-
-        {/* Right Side - Content */}
-        <div className="w-full md:w-1/2 text-center md:text-left">
-          <h1 className="text-4xl font-bold text-gray-800">{text}</h1>
-          <p className="text-gray-600 mt-4 text-lg">
-            Explore thousands of job opportunities and kickstart your career today.
-          </p>
-          <Link to="/jobs">
-            <button className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
-              Get Started
-            </button>
-          </Link>
-        </div>
-      </div>
-      <div><About /></div>
     </>
   );
 };

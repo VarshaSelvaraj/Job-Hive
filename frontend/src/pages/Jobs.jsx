@@ -5,6 +5,7 @@ function Jobs() {
 
   return (
     <div className="flex p-4">
+    
         <JobListing />
     </div>
   );
