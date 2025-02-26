@@ -9,7 +9,7 @@ dotenv.config();
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 // Secret key for signing JWT (store this in environment variables in production)
-const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || 'your-secret-key';
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 // Function to authenticate user (Job Seeker or Recruiter)
 const loginUser = async (req, res) => {
