@@ -15,7 +15,7 @@ const PremiumContent = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-900 p-8">
+    <div className="min-h-screen flex justify-center items-center bg-[#9CDAD8] p-8">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg text-center">
         <h1 className="text-2xl font-bold text-gray-800 mb-4">Premium Status</h1>
         <p className="text-lg text-gray-600">{status.message}</p>

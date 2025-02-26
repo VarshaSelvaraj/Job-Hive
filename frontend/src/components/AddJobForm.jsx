@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddJobForm = () => {
+  const navigate = useNavigate();
   const [jobData, setJobData] = useState({
     job_title: "",
     role: "",
@@ -54,6 +56,7 @@ const AddJobForm = () => {
 
       alert("Job posted successfully!");
       console.log("Response Data:", response.data);
+     
 
       setJobData({
           job_title: "",
@@ -76,8 +79,10 @@ const AddJobForm = () => {
       console.error("Error posting job:", error);
       alert("Failed to post job.");
   }
+  finally {
+    navigate('/dashboard');
   };
-
+  }
   return (
     <div className="flex justify-center mt-20 items-center min-h-screen bg-gray-100 p-6">
       <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg border border-gray-200">

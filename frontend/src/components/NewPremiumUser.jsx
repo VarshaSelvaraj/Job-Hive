@@ -38,7 +38,8 @@ const NewPremiumUser = () => {
     }
   };
   return (
-    <div className="h-auto flex justify-center items-center bg-white p-8 mt-50">
+    <div className="bg-[#9CDAD8]">
+    <div className="h-screen flex justify-center items-center bg-[#9CDAD8] p-8 ">
       <div className="flex gap-30 flex-wrap justify-center">
         {plans.map((plan, index) => (
           <div
@@ -68,6 +69,7 @@ const NewPremiumUser = () => {
         ))}
       </div>
       {error && <p className="text-red-500 mt-4">{error}</p>}
+    </div>
     </div>
   );
   

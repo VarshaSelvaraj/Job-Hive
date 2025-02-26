@@ -42,13 +42,13 @@ const SeekerProfile = () => {
   if (error) return <div className="text-center text-red-500">{error}</div>;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 p-8">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#9CDAD8]">
       
       {/* Layout for Profile & Applied Jobs */}
-      <div className="mt-10 w-full max-w-6xl flex flex-col md:flex-row gap-16">
+      <div className="mt-10 w-full  max-w-6xl flex flex-col md:flex-row gap-16">
         
         {/* Left Section - Profile Image & Details */}
-        <div className="flex flex-col items-center md:items-start w-full md:w-1/3 bg-white shadow-lg p-6 rounded-xl border border-gray-300 transition-transform hover:scale-105 hover:shadow-xl">
+        <div className="flex flex-col items-center md:items-start w-full h-100 mt-21 md:w-1/3 bg-white shadow-lg p-6 rounded-xl border border-gray-300 transition-transform hover:scale-105 hover:shadow-xl">
           <img src="/profile-icon.png" alt="Profile" className="h-32 w-32 rounded-full border-4 border-gray-300" />
           <div className="mt-6 text-left space-y-2">
             <p className="text-lg font-medium text-gray-700"><strong>Username:</strong> {profile.username}</p>

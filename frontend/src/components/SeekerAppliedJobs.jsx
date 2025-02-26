@@ -19,7 +19,7 @@ function SeekerAppliedJobs({ seeker_id }) {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <h2 className="text-3xl font-bold text-center mb-6 text-gray-900">Applied Jobs</h2>
+      <h2 className="text-3xl font-bold text-center mb-6 text-zinc-700">Applied Jobs</h2>
       
       {appliedJobs.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
@@ -30,7 +30,7 @@ function SeekerAppliedJobs({ seeker_id }) {
             >
               {/* Job Title & Company */}
               <div className="border-b pb-4 grid grid-cols-2 align-middle">
-                <h3 className="text-xl font-semibold text-blue-700">{job.job_title}</h3>
+                <h3 className="text-xl font-semibold text-zinc-700">{job.job_title}</h3>
                 <p className="text-gray-800 font-medium">Company : {job.company}</p>
               </div>
 

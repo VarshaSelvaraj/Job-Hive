@@ -2,10 +2,12 @@ const supabase = require("../config/supabaseClient");
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-    service: "Gmail",
+    host: "smtp.gmail.com",
+    port: 465, // Secure SMTP port
+    secure: true, // Use SSL
     auth: {
         user: "yuvarajavr20@gmail.com",
-        pass: "evau bfsl qymi bghm", // Replace with your Google App Password
+        pass: "evau bfsl qymi bghm", // Google App Password
     },
 });
 
