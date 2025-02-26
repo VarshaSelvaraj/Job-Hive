@@ -20,11 +20,12 @@ import EditJob from "./components/EditJob";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js"; 
 import RecruiterDashBoard from "./components/RecruiterDashBoard";
+import About from "./components/About";
 
 // Load Stripe key (Replace with actual key)
 const stripePromise = loadStripe("your-publishable-key-here");
 
-// 🔹 Protected Route Component
+// + Protected Route Component
 const ProtectedRoute = ({ element }) => {
     const user = JSON.parse(localStorage.getItem("user"));  // Get user from localStorage
     const token = localStorage.getItem("token");  // Get token from localStorage
@@ -80,9 +81,10 @@ function App() {
                 {/* 🔹 Public Routes */}
                 <Route path='/login' element={<Login onLogin={handleLogin} />} />
                 <Route path='/signup' element={<Signup />} />
-
-                {/* 🔹 Protected Routes */}
+                <Route path='/about' element={<About />} />
+                
                 <Route path='/' element={<Home />} />
+                {/* 🔹 Protected Routes */}
                 <Route path='/jobs' element={<ProtectedRoute element={<Jobs />} />} />
                 <Route path='/jobs/:job_id' element={<ProtectedRoute element={<JobDetailsView />} />} />
                 <Route path="/editJob/:id" element={<ProtectedRoute element={<EditJob />} />} />

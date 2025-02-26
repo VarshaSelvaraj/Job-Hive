@@ -84,13 +84,13 @@ const AddJobForm = () => {
   };
   }
   return (
-    <div className="flex justify-center mt-20 items-center min-h-screen bg-gray-100 p-6">
+    <div className="flex justify-center mt-13 items-center min-h-screen bg-[#9CDAD8] p-6">
       <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg border border-gray-200">
-        <h2 className="text-3xl font-semibold text-gray-900 text-center mb-6">Post a New Job</h2>
+        <h2 className="text-3xl font-bold text-zinc-500 text-center mb-6">Post a New Job</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
           {Object.keys(jobData).map((key) => (
             <div key={key} className="flex flex-col">
-              <label className="block font-medium text-gray-700 mb-1">
+              <label className="block font-medium text-gray-500 mb-1">
                 {key.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())}
               </label>
               {options[key] ? (
@@ -99,7 +99,7 @@ const AddJobForm = () => {
                   value={jobData[key]}
                   onChange={handleChange}
                   required
-                  className="w-full p-3 border rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                  className="w-full p-3 border border-gray-300 rounded-md"
                 >
                   <option value="">Select {key.replace("_", " ")}</option>
                   {options[key].map((option) => (
@@ -112,7 +112,7 @@ const AddJobForm = () => {
                   value={jobData[key]}
                   onChange={handleChange}
                   required
-                  className="w-full p-3 border rounded-lg bg-gray-50 h-12 resize-none focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                  className="w-full p-3 h-12 border border-gray-300 rounded-md"
                 ></textarea>
               ) : (
                 <input
@@ -121,13 +121,13 @@ const AddJobForm = () => {
                   value={jobData[key]}
                   onChange={handleChange}
                   required
-                  className="w-full p-3 border rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                  className="w-full p-3 border border-gray-300 rounded-md"
                 />
               )}
             </div>
           ))}
           <div className="col-span-2 flex justify-center mt-6">
-            <button type="submit" className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+            <button type="submit" className="px-6 py-3 w-md  bg-[#9CDAD8] text-zinc-700 font-semibold rounded-lg shadow-md hover:bg-gray-200 transition duration-300">
               Post Job
             </button>
           </div>
