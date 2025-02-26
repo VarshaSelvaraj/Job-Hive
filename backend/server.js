@@ -15,27 +15,17 @@ app.use("/", router);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, async () => {
-  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 
   // Check Supabase connection on startup
   try {
     const { error } = await supabase.from("jobs_data").select("id").limit(1);
     if (error) {
-      console.error("❌ Supabase connection failed:", error.message);
+      console.error(" Supabase connection failed:", error.message);
     } else {
-      console.log("✅ Supabase connection successful!");
+      console.log("Supabase connection successful!");
     }
   } catch (err) {
-    console.error("❌ Unexpected error during Supabase connection check:", err);
+    console.error(" Unexpected error during Supabase connection check:", err);
   }
-  // try {
-  //   const { error } = await supabase.from("jobs").select("job_id").limit(1);
-  //   if (error) {
-  //     console.error("❌ Supabase connection failed:", error.message);
-  //   } else {
-  //     console.log("✅ Supabase connection successful!");
-  //   }
-  // } catch (err) {
-  //   console.error("❌ Unexpected error during Supabase connection check:", err);
-  // }
 });
