@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 const PremiumContent = () => {
   const [status, setStatus] = useState({
-    isPremium: true,  // Assuming the user is premium after successful payment
+    isPremium: true,  
     message: "You are a premium provider and will receive all notifications faster than others!",
   });
 
-  const navigate = useNavigate(); // Use the navigate hook to redirect
+  const navigate = useNavigate(); 
 
-  // Button to navigate back to the home page
+  
   const goHome = () => {
-    navigate("/main"); // This is where you want to redirect after showing the premium message
+    navigate("/main"); 
   };
 
   return (
