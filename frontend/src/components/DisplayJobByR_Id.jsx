@@ -12,19 +12,21 @@ function DisplayJobByR_Id() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
-        if (user?.id) {
-            axios
-                .get(`http://localhost:5000/recruiter/${user.id}`)
-                .then((response) => {
-                    setJobs(response.data.jobs);
-                    setLoading(false);
-                })
-                .catch((error) => {
-                    console.error("Error fetching jobs:", error);
-                    setLoading(false);
-                });
-        }
-    }, [user]);
+        if (!user?.id) return; // Prevent unnecessary API calls
+    
+        const fetchJobs = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/recruiter/${user.id}`);
+                setJobs(response.data.jobs);
+            } catch (error) {
+                console.error("Error fetching jobs:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+    
+        fetchJobs();
+    }, [user?.id]); // Depend only on `user.id`
 
     const openApplicants = async (id) => {
         try {
