@@ -56,13 +56,13 @@ function DisplayJobByR_Id() {
     };
 
     return (
-        <div className="max-w-7xl mx-auto p-8 bg-white">
-            <h2 className="text-3xl font-bold text-center text-zinc-600 mb-8">Jobs Posted by You</h2>
+        <div className="max-w-7xl mx-auto p-4 sm:p-8 bg-white ">
+            <h2 className="text-3xl font-bold text-center text-zinc-600 mb-6">Jobs Posted by You</h2>
 
             {jobs.length === 0 ? (
                 <p className="text-center text-gray-500">No jobs found.</p>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
                     {jobs.map((job) => (
                         <div
                             key={job.id}
@@ -77,25 +77,23 @@ function DisplayJobByR_Id() {
                                 <p className="text-zinc-700"><strong>Posted On:</strong> {new Date(job.created_at).toLocaleDateString()}</p>
                             </div>
 
-                            <div className="mt-6 flex gap-4 justify-between items-center">
+                            <div className="mt-6 gap-2 p-4 flex flex-col items-center ">
                                 <button
                                     onClick={() => openApplicants(job.id)}
-                                    className="flex-grow px-5 py-2 bg-blue-200 text-zinc-700 rounded-lg hover:bg-blue-300 transition shadow-md hover:shadow-lg"
+                                    className="w-full sm:w-auto flex-1 px-5 py-2 bg-blue-200 text-zinc-700 rounded-lg hover:bg-blue-300 transition shadow-md hover:shadow-lg"
                                 >
                                     <b>View Applicants</b>
                                 </button>
 
-                                <Link to={`/editJob/${job.id}`} className="flex-grow">
-                                    <button className="w-full h-17 px-5 py-2 bg-yellow-200 text-zinc-700 rounded-lg hover:bg-yellow-300 transition">
-                                        <b>Edit</b>
-                                    </button>
+                                <Link to={`/editJob/${job.id}`} className="w-full sm:w-auto flex-1">
+                                    <button className="w-full px-5 py-2 bg-yellow-200 text-zinc-700 rounded-lg hover:bg-yellow-300 transition over">
+                                        <b>Edit</b>                                  </button>
                                 </Link>
 
                                 <button
                                     onClick={() => handleDelete(job.id)}
-                                    className="flex-grow px-5 py-2 bg-red-200 text-zinc-700 rounded-lg hover:bg-red-300 transition flex items-center justify-center"
-                                >
-                                    <Trash2 className="w-5 h-14 " />
+                                    className="w-full sm:w-auto flex-1 px-5 py-2 bg-red-200 text-zinc-700 rounded-lg hover:bg-red-300 transition flex items-center justify-center"
+                                ><b>Delete</b>
                                     
                                 </button>
                             </div>

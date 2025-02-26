@@ -31,17 +31,17 @@ function RecruiterDashBoard() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#9CDAD8] flex items-start justify-center p-8 mt-15">
-      <div className="max-w-6xl w-full flex gap-8">
+    <div className="min-h-screen bg-[#9CDAD8] flex flex-col items-center p-4 sm:p-8 mt-15">
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row gap-8">
+        
         {/* Left Section: Recruiter Info */}
-        <div className="bg-white shadow-lg rounded-lg flex-1 max-w-[25%] mt-20 h-120 text-center overflow-hidden">
+        <div className="bg-white shadow-lg rounded-lg w-full lg:w-1/3 text-center overflow-hidden ">
           {recruiter ? (
             <>
-              {/* Profile Image (Full width, no padding) */}
               <img
-                src={recruiter.profileImage || "https://static.vecteezy.com/system/resources/previews/036/280/654/original/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg"}
+                src={ "https://static.vecteezy.com/system/resources/previews/036/280/654/original/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg"}
                 alt="Profile"
-                className="w-full h-48 object-cover"
+                className="w-full h-100 object-cover"
               />
 
               <div className="p-6">
@@ -51,7 +51,7 @@ function RecruiterDashBoard() {
                 <p className="text-gray-600"><strong>Company:</strong> {recruiter.company_name}</p>
 
                 <button
-                  className="mt-6 bg-[#9CDAD8]  hover:bg-gray-300 text-zinc-800 font-semibold py-2 px-6 rounded-lg transition duration-300"
+                  className="mt-6 bg-[#9CDAD8] hover:bg-gray-300 text-zinc-800 font-semibold py-2 px-6 rounded-lg transition duration-300"
                   onClick={() => navigate("/addJob")}
                 >
                   Post New Job
@@ -59,15 +59,13 @@ function RecruiterDashBoard() {
               </div>
             </>
           ) : (
-            <p className="text-gray-500">Loading recruiter details...</p>
+            <p className="text-gray-500 p-6">Loading recruiter details...</p>
           )}
         </div>
 
         {/* Right Section: Jobs Posted */}
-        <div className="flex-1 max-w-[75%] mt-20">
-          <div className="bg-white shadow-lg rounded-lg p-6">
-            <DisplayJobByR_Id />
-          </div>
+        <div className="bg-white shadow-lg rounded-lg w-full lg:w-2/3 p-6">
+          <DisplayJobByR_Id />
         </div>
       </div>
     </div>

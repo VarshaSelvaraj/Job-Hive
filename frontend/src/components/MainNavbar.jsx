@@ -1,9 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { FaHive } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoClose } from "react-icons/io5";
 import { useState, useEffect } from "react";
 
 const MainNavbar = ({ logout }) => {
   const [user, setUser] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -37,8 +40,13 @@ const MainNavbar = ({ logout }) => {
             </Link>
           </div>
 
-          {/* Navigation Links */}
-          <div className="flex items-center space-x-6">
+          {/* Mobile Menu Button */}
+          <button className="md:hidden text-gray-600 focus:outline-none" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <IoClose size={30} /> : <GiHamburgerMenu size={30} />}
+          </button>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-6">
             <Link to="/" className={linkClass("/")}>
               Home
             </Link>
@@ -55,8 +63,29 @@ const MainNavbar = ({ logout }) => {
               <span>Logout</span>
             </button>
           </div>
-
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {isOpen && (
+          <div className="md:hidden flex flex-col items-center space-y-4 py-4 bg-white shadow-md">
+            <Link to="/" className={linkClass("/")} onClick={() => setIsOpen(false)}>
+              Home
+            </Link>
+            <Link to="/jobs" className={linkClass("/jobs")} onClick={() => setIsOpen(false)}>
+              Jobs
+            </Link>
+            <Link to={`/seeker-profile/${user?.id || ""}`} className={linkClass(`/seeker-profile/${user?.id || ""}`)} onClick={() => setIsOpen(false)}>
+              Profile
+            </Link>
+            <Link to="/premium" className={linkClass("/premium")} onClick={() => setIsOpen(false)}>
+              Premium
+            </Link>
+            <button onClick={() => { logout(); setIsOpen(false); }} className="text-xl font-semibold text-gray-400 hover:text-[#9CDAD8] transition duration-300">
+              <span>Logout</span>
+            </button>
+          </div>
+        )}
+
       </div>
     </nav>
   );
