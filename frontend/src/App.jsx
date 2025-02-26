@@ -26,8 +26,11 @@ const stripePromise = loadStripe("your-publishable-key-here");
 
 // 🔹 Protected Route Component
 const ProtectedRoute = ({ element }) => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    return user ? element : <Navigate to="/login" replace />;
+    const user = JSON.parse(localStorage.getItem("user"));  // Get user from localStorage
+    const token = localStorage.getItem("token");  // Get token from localStorage
+
+    // Check if both user and token exist
+    return user && token ? element : <Navigate to="/login" replace />;
 };
 
 function App() {
@@ -57,6 +60,7 @@ function App() {
     // 🔹 Handle Logout
     const handleLogout = () => {
         localStorage.removeItem("user");
+        localStorage.removeItem("token");
         window.location.href = "/login";
         setUser(null); 
     };
