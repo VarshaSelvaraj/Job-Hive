@@ -37,8 +37,8 @@ const ApplyJob = () => {
     try {
       const cloudinaryFormData = new FormData();
       cloudinaryFormData.append("file", file);
-      cloudinaryFormData.append("upload_preset", "resumes"); // Set in Cloudinary
-      cloudinaryFormData.append("folder", "resumes"); // Optional: Organize files in Cloudinary
+      cloudinaryFormData.append("upload_preset", "resumes"); 
+      cloudinaryFormData.append("folder", "resumes");
 
       const response = await axios.post(
         "https://api.cloudinary.com/v1_1/dxtauy7ce/upload",
@@ -52,7 +52,7 @@ console.log(response.data.secure_url)
     }
   };
 
-  // Handle Form Submission
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
     
@@ -65,15 +65,8 @@ console.log(response.data.secure_url)
       alert("Resume upload failed. Please try again.");
       return;
     }
-if(!formdata.name){
-  alert("enter name")
-  return
-}
-if(!formdata.skills){
-  alert("enter skills")
-  return
-}
-    // Prepare Data for Backend
+
+    
     const payload = {
       ...formData,
       resume: resumeUrl,
@@ -93,19 +86,19 @@ if(!formdata.skills){
  
 
   return (
-    <div className="max-w-md mx-auto bg-aqua-100 p-6 rounded-lg shadow-md mt-30 ml-90 border-2 ">
+    <div className="max-w-md mx-auto bg-aqua-100 p-6 rounded-lg shadow-md mt-30 ml-120 border-2 ">
       <h2 className="text-center text-xl font-bold mb-4 px-20">Apply</h2>
       <form onSubmit={handleSubmit}>
         
         <input className="w-full p-2 mb-2 border rounded" placeholder="Enter your name" name="username" value={formData.username} onChange={handleChange} />
-        <input className="w-full p-2 mb-2 border rounded" placeholder="Phone" name="phone Number" value={formData.phone} onChange={handleChange} />
+        <input className="w-full p-2 mb-2 border rounded" placeholder="Phone" name="phone" value={formData.phone} onChange={handleChange} />
         <input type="date" className="w-full p-2 mb-2 border rounded" name="dob" value={formData.dob} onChange={handleChange} />
         <input className="w-full p-2 mb-2 border rounded" placeholder="Education" name="education" value={formData.education} onChange={handleChange} />
         <input className="w-full p-2 mb-2 border rounded" placeholder="Skills (comma-separated)" name="skills" value={formData.skills} onChange={handleChange} />
         <input className="w-full p-2 mb-2 border rounded" placeholder="Experience " type="number" name="experience" value={formData.experience} onChange={handleChange} />
         <input className="w-full p-2 mb-2 border rounded" placeholder="Languages" name="languages" value={formData.languages} onChange={handleChange} />
 
-        {/* Resume Upload */}
+       
         <label className="block mb-2 font-medium">Upload Resume (.doc,.pdf)</label>
         <input type="file" name="resume" accept=".pdf,.doc,.docx" className="w-full p-2 mb-2 border rounded" onChange={handleChange} />
 

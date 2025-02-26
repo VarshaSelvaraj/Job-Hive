@@ -8,7 +8,7 @@ const PremiumPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    let isMounted = true; // Prevent updates on unmounted component
+    let isMounted = true; 
 
     const checkPremiumStatus = async () => {
       try {
@@ -17,7 +17,7 @@ const PremiumPage = () => {
           return navigate("/getpremium"); 
         }
 
-        // API call to check premium status
+        
         console.log(storedUser.id)
         const response = await axios.get(`http://localhost:5000/check-premium/${storedUser.id}`, {
           withCredentials: true,
@@ -25,9 +25,9 @@ const PremiumPage = () => {
         console.log(response)
         if (isMounted) {
           if (response.data.isPremium) {
-            navigate("/haspremium"); // ✅ Redirect only if premium
+            navigate("/haspremium"); 
           } else {
-            navigate("/getpremium"); // ❌ Redirect if not premium
+            navigate("/getpremium"); 
           }
         }
       } catch (err) {
@@ -44,7 +44,7 @@ const PremiumPage = () => {
     checkPremiumStatus();
 
     return () => {
-      isMounted = false; // Cleanup to prevent memory leaks
+      isMounted = false; 
     };
   }, [navigate]);
 
