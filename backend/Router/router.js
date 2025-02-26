@@ -1,7 +1,6 @@
 const getJobs = require('../Controllers/getJobs');
 const getJobById = require('../Controllers/getJobById');
 const express = require('express');
-const { getFilteredJobs } = require('../Controllers/getFilteredJobs');
 const { storeJobSeeker, storeRecruiter,getRecruiterDetailsById } = require('../Controllers/userController');
 const { loginUser } = require('../Controllers/loginController');
 const { checkPremium, createCheckoutSession } = require("../Controllers/Premiumdata");
@@ -14,14 +13,18 @@ const { getJobApplicantsByJob_Id } = require('../Controllers/getJobApplicantsByJ
 
 const router = express.Router();
 
+// get all jobs
 router.get('/jobs', getJobs);
+// get jobs by id
 router.get('/jobs/:id', getJobById);
-router.get('/jobs/filter', getFilteredJobs);
+// delete job by id
 router.delete('/jobs/:id', deleteJobById);
+// edit job by id
 router.put('/jobs/:id', editJobById);
 
-
+// posting a new job by recruiter
 router.post("/post-job", postJob);
+// get recruiter details by recuiter id
 router.get("/getRecruiterDetails/:id", getRecruiterDetailsById);
 
 // Route to store Job Seeker data
@@ -29,7 +32,9 @@ router.post('/jobseeker', storeJobSeeker);
 
 // Route to store Recruiter data
 router.post('/recruiter', storeRecruiter);
+// get jobs by recruiter id to display in the recruiter dash board
 router.get('/recruiter/:recruiter_id', getJobsByR_Id);
+
 // Route to login
 router.post('/login', loginUser);
 
@@ -38,6 +43,7 @@ router.get('/check-premium/:number', checkPremium);
 router.post("/create-checkout-session", createCheckoutSession);
 router.post("/appliedjob", appliedjob);
 
+// get the job seeker deatils by uisng email
 router.get('/profile/:email', getProfile);
 
 // getting the aplied jobs by using the seeker id
@@ -45,4 +51,5 @@ router.get('/applied-jobs/:id',getAppliedJobsByS_Id)
 
 // getting the applicants deatils by uing the job id
 router.get('/applicants/:id',getJobApplicantsByJob_Id)
+
 module.exports = router;

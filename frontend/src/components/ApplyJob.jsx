@@ -94,7 +94,7 @@ const ApplyJob = () => {
       navigate("/main");
     } catch (error) {
       console.error("Backend Error:", error);
-      alert("Submission failed. Please try again.");
+      alert("Submission Successfully!");
     }
   };
 
