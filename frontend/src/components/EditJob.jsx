@@ -96,19 +96,20 @@ const EditJob = () => {
   if (loading) return <div className="text-center text-xl mt-10">Loading job details...</div>;
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
-      <h2 className="text-3xl font-bold text-center mb-6">Edit Job</h2>
+    <div className="bg-[#9CDAD8] h-screen">
+    <div className="max-w-3xl mx-auto mt-16 p-6 bg-white rounded-lg shadow-xl">
+      <h2 className="text-3xl font-bold text-center mb-6 text-zinc-500">Edit Job</h2>
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {Object.keys(jobData).map((key) => (
           <div key={key} className="flex flex-col">
-            <label className="font-medium text-gray-700 mb-1 capitalize">{key.replace(/_/g, " ")}</label>
+            <label className="font-medium text-zinc-500 mb-1 capitalize">{key.replace(/_/g, " ")}</label>
             {key === "job_description" || key === "qualifications" || key === "company_profile" ? (
               <textarea
                 name={key}
                 value={jobData[key]}
                 onChange={handleChange}
                 required
-                className="w-full p-3 border rounded-lg bg-gray-50 h-24 resize-none focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                className="w-full p-3 border border-gray-300 rounded-md h-12"
               ></textarea>
             ) : key === "experience" || key === "salary_range" || key === "work_type" || key === "employment_type" || key === "country" ? (
               <select
@@ -116,7 +117,7 @@ const EditJob = () => {
                 value={jobData[key]}
                 onChange={handleChange}
                 required
-                className="w-full p-3 border rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                className="w-full p-3 border border-gray-300 rounded-md"
               >
                 <option value="">Select {key.replace("_", " ")}</option>
                 {options[key].map((option) => (
@@ -132,14 +133,14 @@ const EditJob = () => {
                 value={jobData[key]}
                 onChange={handleChange}
                 required
-                className="w-full p-3 border rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                className="w-full p-3 border border-gray-300 rounded-md"
               />
             )}
           </div>
         ))}
 
         <div className="col-span-2 flex justify-center gap-4 mt-6">
-          <button type="submit" className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+          <button type="submit" className="px-6 py-3 bg-[#9CDAD8] text-zinc-800 font-semibold rounded-lg hover:bg-gray-300">
             Update Job
           </button>
           <button type="button" onClick={() => navigate("/dashboard")} className="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
@@ -147,6 +148,7 @@ const EditJob = () => {
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 };

@@ -49,9 +49,13 @@ const SeekerProfile = () => {
         
         {/* Left Section - Profile Image & Details */}
         <div className="flex flex-col items-center md:items-start w-full h-100 mt-21 md:w-1/3 bg-white shadow-lg p-6 rounded-xl border border-gray-300 transition-transform hover:scale-105 hover:shadow-xl">
-          <img src="/profile-icon.png" alt="Profile" className="h-32 w-32 rounded-full border-4 border-gray-300" />
+        <img
+                src= "https://static.vecteezy.com/system/resources/previews/036/280/654/original/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-illustration-vector.jpg"
+                alt="Profile"
+                className="w-full h-58 object-cover"
+              />
           <div className="mt-6 text-left space-y-2">
-            <p className="text-lg font-medium text-gray-700"><strong>Username:</strong> {profile.username}</p>
+            <p className="text-2xl font-medium text-gray-700"><strong>Hi,</strong> {profile.username}!</p>
             <p className="text-lg font-medium text-gray-700"><strong>Email:</strong> {profile.email}</p>
             <p className="text-lg font-medium text-gray-700"><strong>Phone:</strong> {profile.phone || "N/A"}</p>
           </div>

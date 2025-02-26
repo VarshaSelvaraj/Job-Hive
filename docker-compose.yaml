@@ -22,12 +22,3 @@ services:
       - PORT=5000
     ports:
       - "5000:5000"
- 
-  # db:
-  #   image: supabase/postgres
-  #   restart: always
-   
-  #   volumes:
-  #     - ./data:/data/db
-  #   ports:
-  #     - "27017:27017"
